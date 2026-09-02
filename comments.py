@@ -4,11 +4,6 @@ import os
 from dotenv import load_dotenv
 import googleapiclient.discovery
 
-load_dotenv()
-
-
-#st.title("Comment Anal")
-#st.header("Please Paste The Youtube Link Below")
 
 def get_comment():
     # Disable OAuthlib's HTTPS verification when running locally.
@@ -29,5 +24,3 @@ def get_comment():
     response = request.execute()
 
     print(response)
-
-get_comment()

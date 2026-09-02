@@ -4,10 +4,10 @@ import os
 from dotenv import load_dotenv
 import googleapiclient.discovery
 
+load_dotenv()
 
-def get_comment():
-    # Disable OAuthlib's HTTPS verification when running locally.
-    # *DO NOT* leave this option enabled in production.
+def get_comment(link):
+    link = link.strip()[-11:]
     os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "0"
 
     api_service_name = "youtube"
@@ -18,9 +18,19 @@ def get_comment():
         api_service_name, api_version, developerKey = DEVELOPER_KEY)
 
     request = youtube.commentThreads().list(
-        videoId="wiSIE-fKsUI", order="relevance", maxResults=10,
+        videoId=link, order="relevance", maxResults=10,
         part="snippet"
     )
     response = request.execute()
 
-    print(response)
+    formatted_comments = []
+
+    for item in response.get('items', [])[:5]:
+        snippet = item['snippet']['topLevelComment']['snippet']
+        name = snippet['authorDisplayName']
+        text = snippet['textOriginal']
+        
+        # Combine them into: Name: "Comment Text"
+        formatted_comments.append(f'{name}: "{text}"')
+
+    return formatted_comments

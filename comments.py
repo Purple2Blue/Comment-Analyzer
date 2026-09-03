@@ -13,7 +13,7 @@ def get_video_id(link):
     if match:
         videp_id = match.group(4)
 
-def get_comment(link): 
+def get_comment_top_10(video_id): 
     os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "0"
 
     api_service_name = "youtube"
@@ -24,7 +24,7 @@ def get_comment(link):
         api_service_name, api_version, developerKey = DEVELOPER_KEY)
 
     request = youtube.commentThreads().list(
-        videoId=link, order="relevance", maxResults=10,
+        videoId=video_id, order="relevance", maxResults=10,
         part="snippet"
     )
     response = request.execute()

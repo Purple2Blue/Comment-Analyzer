@@ -7,11 +7,12 @@ import googleapiclient.discovery
 load_dotenv()
 
 def get_video_id(link): 
-    pattern = r"^(https?://)?(www\.)?(youtube\.com/watch\?v=|youtu\.be/|youtube\.com/embed/)([a-zA-Z0-9_-]{11})$"
+    pattern = r"^(https?://)?(www\.)?(youtube\.com/watch\?v=|youtu\.be/|youtube\.com/embed/)([a-zA-Z0-9_-]{11})$" 
     link = link.strip()
-    match = re.fullmatch(pattern, link)
+    match = re.fullmatch(pattern, link) #Using Regex for verification
     if match:
-        videp_id = match.group(4)
+        video_id = match.group(4)
+    return video_id     
 
 def get_comment_top_10(video_id): 
     os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "0"

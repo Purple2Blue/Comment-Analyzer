@@ -30,7 +30,7 @@ def get_comment_top_10(video_id):
     )
     response = request.execute()
 
-    formatted_comments = []
+    formatted_comments = [] #Getting the comment text with commenter name
 
     for item in response.get('items', [])[:5]:
         snippet = item['snippet']['topLevelComment']['snippet']

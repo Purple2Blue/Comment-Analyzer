@@ -1,13 +1,19 @@
 import streamlit as st 
-import requests
+import re
 import os
 from dotenv import load_dotenv
 import googleapiclient.discovery
 
 load_dotenv()
 
-def get_comment(link):
-    link = link.strip()[-11:]
+def get_video_id(link): 
+    pattern = r"^(https?://)?(www\.)?(youtube\.com/watch\?v=|youtu\.be/|youtube\.com/embed/)([a-zA-Z0-9_-]{11})$"
+    link = link.strip()
+    match = re.fullmatch(pattern, link)
+    if match:
+        videp_id = match.group(4)
+
+def get_comment(link): 
     os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "0"
 
     api_service_name = "youtube"

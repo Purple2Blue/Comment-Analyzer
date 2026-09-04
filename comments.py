@@ -19,6 +19,8 @@ def get_video_id(link):
         match = re.fullmatch(pattern_s, link) #Using Regex for verification for shorts link
     if match:
         video_id = match.group(4)
+    if not match:
+        st.warning("Please Enter a Valid link!")
 
     return video_id     
 

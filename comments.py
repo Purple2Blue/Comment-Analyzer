@@ -10,9 +10,13 @@ def get_video_id(link):
     match = None
     video_id = None
     if link:
-        pattern = r"^(https?://)?(www\.)?(youtube\.com/watch\?v=|youtu\.be/|youtube\.com/embed/)([a-zA-Z0-9_-]{11})$" 
+        pattern_n = r"^(https?://)?(www\.)?(youtube\.com/watch\?v=|youtu\.be/|youtube\.com/embed/)([a-zA-Z0-9_-]{11})$" 
         link = link.strip()
-        match = re.fullmatch(pattern, link) #Using Regex for verification
+        match = re.fullmatch(pattern_n, link) #Using Regex for verification for normal youtube link
+    if not match and link:
+        pattern_s = r"^(https?://)?(www\.)?(youtube\.com/shorts/)([a-zA-Z0-9_-]{11})$" 
+        link = link.strip()
+        match = re.fullmatch(pattern_s, link) #Using Regex for verification for shorts link
     if match:
         video_id = match.group(4)
 

@@ -19,15 +19,17 @@ if st.session_state.video_id:
     top_10_comments = comments.get_comment_top_10(st.session_state.video_id)
 
     if top_10_comments:
-        for item in top_10_comments:
-            match = re.match(r'@(\w+): "(.*)"$', item, re.DOTALL)
-            if match:
-                author = match.group(1)
-                comment = match.group(2)
-                
-                st.write(f"Author: {author}")
-                st.write(f"Comment: {comment}")
-                st.write("---")
+        st.header("Top Comments")
+        with st.container(height=500):
+            for item in top_10_comments:
+                match = re.match(r'@(\w+): "(.*)"$', item, re.DOTALL)
+                if match:
+                    author = match.group(1)
+                    comment = match.group(2)
+                    
+                    st.write(f"Author: @{author}")
+                    st.write(f"Comment: {comment}")
+                    st.write("---")
         if not match:
             st.warning("Video doesn't have enough comments")
 

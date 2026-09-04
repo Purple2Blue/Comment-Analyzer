@@ -6,7 +6,7 @@ st.title("Comment Anal")
 st.header("Please Paste The Youtube Link Below")
 
 if "video_id" not in st.session_state:
-    st.session_state.video_id - None
+    st.session_state.video_id = None
 
 link = st.text_input("Enter Youtube Link") #Getting the Link
 

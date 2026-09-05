@@ -15,6 +15,13 @@ if link:
 else:
     st.info("Please enter a valid Youtube link.")
 
+col1, col2 = st.columns(2)
+
+if st.session_state.video_id:
+    col1.metric(f"{comments.get_comment_count(st.session_state.video_id)}Comments")
+else:
+    st.info("Please enter a valid Youtube link.")
+
 if st.session_state.video_id:
     top_10_comments = comments.get_comment_top_10(st.session_state.video_id)
 

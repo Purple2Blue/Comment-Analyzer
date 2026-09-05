@@ -6,6 +6,13 @@ import googleapiclient.discovery
 
 load_dotenv()
 
+api_service_name = "youtube"
+api_version = "v3"
+DEVELOPER_KEY = os.getenv("YOUTUBE-API")
+
+youtube = googleapiclient.discovery.build(
+    api_service_name, api_version, developerKey = DEVELOPER_KEY)
+
 def get_video_id(link): 
     match = None
     video_id = None
@@ -28,13 +35,6 @@ def get_comment_top_10(video_id):
     if video_id:
         os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "0"
 
-        api_service_name = "youtube"
-        api_version = "v3"
-        DEVELOPER_KEY = os.getenv("YOUTUBE-API")
-
-        youtube = googleapiclient.discovery.build(
-            api_service_name, api_version, developerKey = DEVELOPER_KEY)
-
         request = youtube.commentThreads().list(
             videoId=video_id, order="relevance", maxResults=10,
             part="snippet"
@@ -52,3 +52,8 @@ def get_comment_top_10(video_id):
             formatted_comments.append(f'{name}: "{text}"')
 
         return formatted_comments
+
+
+def get_comment_count(video_id):
+    if video_id:
+        pass

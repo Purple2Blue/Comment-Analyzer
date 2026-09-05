@@ -6,6 +6,7 @@ import googleapiclient.discovery
 
 load_dotenv()
 
+#Declaring youtube api variable
 api_service_name = "youtube"
 api_version = "v3"
 DEVELOPER_KEY = os.getenv("YOUTUBE-API")
@@ -13,7 +14,7 @@ DEVELOPER_KEY = os.getenv("YOUTUBE-API")
 youtube = googleapiclient.discovery.build(
     api_service_name, api_version, developerKey = DEVELOPER_KEY)
 
-def get_video_id(link): 
+def get_video_id(link): # -> Getting the video ID from link
     match = None
     video_id = None
     if link:
@@ -31,7 +32,7 @@ def get_video_id(link):
 
     return video_id     
 
-def get_comment_top_10(video_id): 
+def get_comment_top_10(video_id): # -> Getting top 10 comments
     if video_id:
         os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "0"
 
@@ -54,6 +55,14 @@ def get_comment_top_10(video_id):
         return formatted_comments
 
 
-def get_comment_count(video_id):
+def get_comment_count(video_id): # -> Get Comment Counts
     if video_id:
-        pass
+        response = youtube.videos().list(
+            part='statistics',
+            id = video_id
+        ).execute
+    if response['items']:
+        comment_count = response['items'][0]['statistics'].get('commentCount', 'Comments disabled or unavailable')
+    else:
+        st.warning("Video Not Found")
+    return comment_count

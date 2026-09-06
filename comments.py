@@ -60,7 +60,7 @@ def get_comment_count(video_id): # -> Get Comment Counts
         response = youtube.videos().list(
             part='statistics',
             id = video_id
-        ).execute
+        ).execute()
     if response['items']:
         comment_count = response['items'][0]['statistics'].get('commentCount', 'Comments disabled or unavailable')
     else:

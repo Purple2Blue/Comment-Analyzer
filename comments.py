@@ -67,6 +67,14 @@ def get_comment_count(video_id): # -> Get Comment Counts
         st.warning("Video Not Found")
     return comment_count
 
-def get_video_title(video_id): 
+def get_view_count(video_id):
     if video_id:
-        pass
+        response = youtube.videos().list(
+            part='statistics',
+            id = video_id
+            ).execute()
+    if response['items']:
+        view_count = response['items'][0]['statistics'].get('ViewCount')
+    else:
+        st.warning("Video Not Found")
+    return view_count

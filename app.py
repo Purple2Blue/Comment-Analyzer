@@ -21,6 +21,10 @@ if st.session_state.video_id:
     col1.metric(label = "Comment Count", value = comments.get_comment_count(st.session_state.video_id))
 
 if st.session_state.video_id:
+    col2.metric(label = "View Count", value = comments.get_view_count(st.session_state.video_id))
+
+
+if st.session_state.video_id:
     top_10_comments = comments.get_comment_top_10(st.session_state.video_id)
 
     if top_10_comments:

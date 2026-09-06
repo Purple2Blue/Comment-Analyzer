@@ -15,13 +15,17 @@ if link:
 else:
     st.info("Please enter a valid Youtube link.")
 
-col1, col2 = st.columns(2)
+col1, col2, col3 = st.columns(3)
 
 if st.session_state.video_id:
     col1.metric(label = "Comment Count", value = comments.get_comment_count(st.session_state.video_id))
 
 if st.session_state.video_id:
     col2.metric(label = "View Count", value = comments.get_view_count(st.session_state.video_id))
+
+if st.session_state.video_id:
+    col2.metric(label = "Like Count", value = comments.get_like_count(st.session_state.video_id))
+
 
 
 if st.session_state.video_id:

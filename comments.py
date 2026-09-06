@@ -66,3 +66,7 @@ def get_comment_count(video_id): # -> Get Comment Counts
     else:
         st.warning("Video Not Found")
     return comment_count
+
+def get_video_title(video_id): 
+    if video_id:
+        pass

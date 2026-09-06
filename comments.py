@@ -82,3 +82,19 @@ def get_view_count(video_id): # -> Gets View Count
         return view_count
     else:
         return "--"
+
+def get_like_count(video_id):
+    like_count = None
+    if video_id:
+        response = youtube.videos().list(
+            part='statistics',
+            id = video_id
+            ).execute()
+    if response['items']:
+        view_count = response['items'][0]['statistics'].get('likeCount')
+    else:
+        st.warning("Video Not Found")
+    if like_count:
+        return like_count
+    else:
+        return "--"

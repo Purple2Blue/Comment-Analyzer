@@ -24,7 +24,7 @@ if st.session_state.video_id:
     col2.metric(label = "View Count", value = comments.get_view_count(st.session_state.video_id))
 
 if st.session_state.video_id:
-    col2.metric(label = "Like Count", value = comments.get_like_count(st.session_state.video_id))
+    col3.metric(label = "Like Count", value = comments.get_like_count(st.session_state.video_id))
 
 
 

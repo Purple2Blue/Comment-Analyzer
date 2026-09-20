@@ -29,20 +29,20 @@ if st.session_state.video_id:
 
 
 if st.session_state.video_id:
-    top_10_comments = comments.get_comment_top_10(st.session_state.video_id)
+    number_comments = st.number_input(label="How Many Top Comments Do You Wish To See", min_value=1, max_value=30, step=1, value=10)
+    top_n_comments = comments.get_comment_top_n(st.session_state.video_id, number_comments)
 
-    if top_10_comments:
-        st.header("Top Comments")
-        with st.container(height=500):
-            for item in top_10_comments:
-                match = re.match(r'@(\w+): "(.*)"$', item, re.DOTALL)
+    if top_n_comments:
+        st.header(f"Top {number_comments} Comments")
+        with st.container(height=550):
+            for item in top_n_comments:
+                match = re.match(r'(.+?): "(.*)\"$', item, re.DOTALL)
                 if match:
                     author = match.group(1)
                     comment = match.group(2)
                     
-                    st.write(f"Author: @{author}")
+                    st.write(f"Author: {author}")
                     st.write(f"Comment: {comment}")
                     st.write("---")
-        if not match:
-            st.warning("Video doesn't have enough comments")
-
+    else:
+        st.warning("Video doesn't have enough comments")

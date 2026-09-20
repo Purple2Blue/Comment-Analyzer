@@ -32,7 +32,7 @@ def get_video_id(link): # -> Getting the video ID from link
 
     return video_id     
 
-def get_comment_top_10(video_id): # -> Getting top 10 comments
+def get_comment_top_n(video_id, n): # -> Getting top 10 comments
     if video_id:
         os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "0"
 
@@ -44,7 +44,7 @@ def get_comment_top_10(video_id): # -> Getting top 10 comments
 
         formatted_comments = [] #Getting the comment text with commenter name
 
-        for item in response.get('items', [])[:10]:
+        for item in response.get('items', [])[:n]:
             snippet = item['snippet']['topLevelComment']['snippet']
             name = snippet['authorDisplayName']
             text = snippet['textOriginal']

@@ -37,7 +37,7 @@ def get_comment_top_n(video_id, n): # -> Getting top 10 comments
         os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "0"
 
         request = youtube.commentThreads().list(
-            videoId=video_id, order="relevance", maxResults=50,
+            videoId=video_id, order="relevance", maxResults=50, #The following will not allow more than 50 comments to be returned.
             part="snippet"
         )
         response = request.execute()
